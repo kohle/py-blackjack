@@ -7,7 +7,7 @@ Text based blackjack written in Python. The goal of this project is to learn add
 - [x] Calculate hand totals
 - [x] Differentiate between face cards
 - [x] Automatically use an ace as a one or an eleven
-- [ ] Allow user to hit or stay
+- [x] Implement a hit function
 - [ ] Clear hands and reset the playing deck
 - [ ] Score keeping
 - [ ] Betting on each round
