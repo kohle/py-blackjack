@@ -9,5 +9,9 @@ Text based blackjack written in Python. The goal of this project is to learn add
 - [x] Automatically use an ace as a one or an eleven
 - [x] Implement a hit function
 - [ ] Clear hands and reset the playing deck
-- [ ] Score keeping
+- [ ] Score keeping (file writing/reading)
+- [ ] Chip inventory (file writing/reading)
 - [ ] Betting on each round
+- [ ] Main menu
+    - [ ] About screen
+    - [ ] High score table
