@@ -1,5 +1,5 @@
 # py-blackjack
-Text based blackjack written in Python. The goal of this project is to learn additional Python to what I already know.
+Text based blackjack written in Python. This project to be used as a final project for CIT135.
 
 ## To-Do
 - [x] Create a deck as a list
