@@ -6,10 +6,6 @@
 # Import Python classes
 import random
 
-# Import project classes
-from deck import *
-from math_functions import *
-
 # Create the cards in the deck
 # Since ace is either a 1 or 11 it is easier to go in JQKA order
 deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4
@@ -84,23 +80,37 @@ def winner() :
     elif player_total == dealer_total :
         print("It\'s a tie!")
 
+playing = input("Would you like to play? (Y/N) ")
 
-# Smiple testing procedure; NOT a working game:
-# Deal the house and the player
-dealer = deal(deck)
-player = deal(deck)
+while playing.lower() == "y" :
 
-# Print the results
-print("Dealer\'s hand:", str(dealer), "Total:", str(total(dealer)))
-print("Player\'s hand:", str(player), "Total:", str(total(player)))
+    dealer = deal(deck)
+    player = deal(deck)
 
-# Hit the player
-player = hit(player)
-print("Player\'s hand:", str(dealer), "Total:", str(total(dealer)))
+    print("Dealer\'s hand:", str(dealer), "Total:", str(total(dealer)))
+    print("Player\'s hand:", str(player), "Total:", str(total(player)))
 
-# Get the totals
-dealer_total = total(dealer)
-player_total = total(player)
+    should_hit = input("Would you like to hit? (Y/N) ")
 
-# Winner
-winner()
+    while should_hit.lower() == "y" :
+        player = hit(player)
+        print("Player\'s hand:", str(dealer), "Total:", str(total(dealer)))
+
+        if total(player) > 21 :
+            print("You busted!")
+            playing = input("Would you like to play? (Y/N) ")
+
+        else :
+            should_hit = input("Would you like to hit? (Y/N) ")
+
+    # Get the totals
+    dealer_total = total(dealer)
+    player_total = total(player)
+
+    # Winner
+    winner()
+
+    playing = input("Would you like to play? (Y/N) ")
+
+else :
+    print("Thanks for playing!")
