@@ -1,8 +1,14 @@
+# py-blackjack
+# File description: Main class for the program
 # Developed by Kohle Feeley
 # Burlington, Vermont 2017
 
-# Imports
+# Import Python classes
 import random
+
+# Import project classes
+from deck import *
+from math_functions import *
 
 # Create the cards in the deck
 # Since ace is either a 1 or 11 it is easier to go in JQKA order
@@ -48,22 +54,6 @@ def hit(hand) :
 
     return hand
 
-# Method to calculate the hand's total value
-def total(hand) :
-    total = 0
-
-    for card in hand :
-        if card == "J" or card == "Q" or card == "K" :
-            total = total + 10
-        elif card == "A" :
-            if total >= 11 :
-                total = total + 1
-            else :
-                total = total + 11
-        else :
-            total = total + card
-
-    return total
 
 # Method to determime who won and print the appropriate statement
 def winner() :
@@ -77,6 +67,7 @@ def winner() :
         print("Player wins!")
     elif player_total == dealer_total :
         print("It\'s a tie!")
+
 
 # Smiple testing procedure; NOT a working game:
 # Deal the house and the player
