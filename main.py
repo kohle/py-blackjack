@@ -54,6 +54,22 @@ def hit(hand) :
 
     return hand
 
+# Method to calculate the hand's total value
+def total(hand) :
+    total = 0
+
+    for card in hand :
+        if card == "J" or card == "Q" or card == "K" :
+            total = total + 10
+        elif card == "A" :
+            if total >= 11 :
+                total = total + 1
+            else :
+                total = total + 11
+        else :
+            total = total + card
+
+    return total
 
 # Method to determime who won and print the appropriate statement
 def winner() :
