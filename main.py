@@ -6,8 +6,7 @@
 # Import Python classes
 import random
 
-# Create the cards in the deck
-# Since ace is either a 1 or 11 it is easier to go in JQKA order
+# Create the deck of cards
 deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4
 
 # Method that deals 2 cards into a hand (a list), remove from deck
@@ -114,6 +113,10 @@ def game() :
 
         # Actually playing the game
         while menu_choice.lower() == "p" :
+            # Re-state the deck of cards to prevent it from running out if
+            # the player decides to do multiple rounds
+            deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4
+
             # Create the two hands
             dealer = deal(deck)
             player = deal(deck)
