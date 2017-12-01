@@ -8,10 +8,10 @@ Text based blackjack written in Python. This project to be used as a final proje
 - [x] Differentiate between face cards
 - [x] Automatically use an ace as a one or an eleven
 - [x] Implement a hit function
-- [ ] Clear hands and reset the playing deck
+- [x] Clear hands and reset the playing deck
+- [ ] Ask the user for their name (for score purposes)
 - [ ] Score keeping (file writing/reading)
-- [ ] Chip inventory (file writing/reading)
 - [ ] Betting on each round
 - [ ] Main menu
-    - [ ] About screen
+    - [x] About screen
     - [ ] High score table
