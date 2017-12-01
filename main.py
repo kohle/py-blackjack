@@ -69,6 +69,9 @@ def total(hand) :
 
 # Method to determime who won and print the appropriate statement
 def winner() :
+    dealer_total = total(dealer)
+    player_total = total(player)
+    
     if dealer_total > 21 :
         print("The dealer busted! You win!")
     elif player_total > 21 :
@@ -80,37 +83,87 @@ def winner() :
     elif player_total == dealer_total :
         print("It\'s a tie!")
 
-playing = input("Would you like to play? (Y/N) ")
+# Game function that allows it to keep looping using break/while statements
+def game() :
+    while True:
+        # Print main menu
+        print("##########[ BLACKJACK ]##########")
+        print("#                               #")
+        print("#           MAIN MENU           #")
+        print("#    [P]LAY [S]CORES [A]BOUT    #")
+        print("#                               #")
+        print("#################################")
 
-while playing.lower() == "y" :
+        # Ask for user's input
+        menu_choice = input("     ENTER YOUR CHOICE: ")
 
-    dealer = deal(deck)
-    player = deal(deck)
+        # About screen
+        while menu_choice.lower() == "a" :
+            print("\n############[ ABOUT ]############")
+            print("#                               #")
+            print("#   Developed by Kohle Feeley   #")
+            print("#           (C) 2017            #")
+            print("#                               #")
+            print("#################################\n")
+            break
 
-    print("Dealer\'s hand:", str(dealer), "Total:", str(total(dealer)))
-    print("Player\'s hand:", str(player), "Total:", str(total(player)))
+        # High score table
+        while menu_choice.lower() == "s" :
+            print("\nFUTURE SCORES\n")
+            break
 
-    should_hit = input("Would you like to hit? (Y/N) ")
+        # Actually playing the game
+        while menu_choice.lower() == "p" :
+            # Create the two hands
+            dealer = deal(deck)
+            player = deal(deck)
 
-    while should_hit.lower() == "y" :
-        player = hit(player)
-        print("Player\'s hand:", str(dealer), "Total:", str(total(dealer)))
+            # Tell the players their current total
+            print("\n############[ HAND ]############")
+            print("YOUR HAND:", str(player))
+            print("YOUR TOTAL:", str(total(player)))
 
-        if total(player) > 21 :
-            print("You busted!")
-            playing = input("Would you like to play? (Y/N) ")
+            # Ask if they want to hit
+            hit_hand = input("\nDO YOU WANT TO HIT? (Y/N): ")
 
-        else :
-            should_hit = input("Would you like to hit? (Y/N) ")
+            # If they want to hit
+            if hit_hand.lower() == "y" :
+                hit(player)
 
-    # Get the totals
-    dealer_total = total(dealer)
-    player_total = total(player)
+                # Give them their new hand
+                print("\n############[ HAND ]############")
+                print("YOUR HAND:", str(player))
+                print("YOUR TOTAL:", str(total(player)))
 
-    # Winner
-    winner()
+                # If the player didn't bust
+                if total(player) < 21 :
+                    # This is the cut-off I decided for the dealer hitting
+                    if total(dealer) < 12 :
+                        hit(dealer)
 
-    playing = input("Would you like to play? (Y/N) ")
+            print("\n###########[ RESULTS ]##########")
+            print("YOUR TOTAL:", str(total(player)))
+            print("DEALER TOTAL:", str(total(dealer)))
+            print() # Blank line
+            
+            if total(dealer) > 21 :
+                print("The dealer busted! You win!")
+            elif total(player) > 21 :
+                print("You busted! Dealer wins!")
+            elif total(dealer) > total(player) :
+                print("Dealer wins!")
+            elif total(player) > total(dealer) :
+                print("Player wins!")
+            elif total(player) == total(dealer) :
+                print("It\'s a tie!")
 
-else :
-    print("Thanks for playing!")
+            print() # Blank line
+
+            break
+
+
+
+            
+        
+
+game()
