@@ -6,6 +6,22 @@
 # Import Python classes
 import random
 
+# Score variable
+score = 0
+
+# Create score file if it doesn't exist with base score, otherwise get score
+try :
+    score_file = open("score.txt", "r")
+    score = float(str(score_file.read()))
+    score_file.close()
+    
+except FileNotFoundError:
+    score_file = open("score.txt", "w")
+    score_file.write("10")
+    score = 100
+    score_file.close()
+    
+
 # Create the deck of cards
 deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4
 
@@ -89,7 +105,7 @@ def game() :
         print("##########[ BLACKJACK ]##########")
         print("#                               #")
         print("#           MAIN MENU           #")
-        print("#    [P]LAY [S]CORES [A]BOUT    #")
+        print("#     [P]LAY [S]CORE [A]BOUT    #")
         print("#                               #")
         print("#################################")
 
@@ -108,7 +124,9 @@ def game() :
 
         # High score table
         while menu_choice.lower() == "s" :
-            print("\nFUTURE SCORES\n")
+            print("\n############[ SCORE ]############")
+            print("YOUR SCORE IS: ", str(score))
+            print() # Break line
             break
 
         # Actually playing the game
@@ -125,6 +143,22 @@ def game() :
             print("\n############[ HAND ]############")
             print("YOUR HAND:", str(player))
             print("YOUR TOTAL:", str(total(player)))
+
+            # Betting procedure
+            print("\n###########[ BETTING ]##########")
+            print("YOU WILL RECEIVE 1.5x YOUR BET IF YOU WIN THE ROUND.")
+            print("YOUR SCORE IS: ", str(score))
+            betting = input("DO YOU WANT TO PLACE A BET? (Y/N): ")
+            amount = 0
+
+            if betting.lower() == "y" :
+                amount = input("ENTER YOUR BET: ")
+                amount = float(str(amount))
+
+                while amount > score :
+                    print("YOU MUST ENTER AN AMOUNT LESS THAN YOUR SCORE.")
+                    amount = input("ENTER YOUR BET: ")
+                    amount = float(str(amount))
 
             # Ask if they want to hit
             hit_hand = input("\nDO YOU WANT TO HIT? (Y/N): ")
@@ -144,6 +178,7 @@ def game() :
                     if total(dealer) < 12 :
                         hit(dealer)
 
+
             print("\n###########[ RESULTS ]##########")
             print("YOUR TOTAL:", str(total(player)))
             print("DEALER TOTAL:", str(total(dealer)))
@@ -151,22 +186,54 @@ def game() :
             
             if total(dealer) > 21 :
                 print("The dealer busted! You win!")
+
+                if amount > 0 :
+                    winnings = amount * 1.5
+                    new_score = score + winnings
+                    print("You won", str(amount * 1.5), "points!")
+                    print("Your new score is", str(new_score))
+                    score_file = open("score.txt", "w")
+                    score_file.write(str(new_score))
+                    score_file.close()
             elif total(player) > 21 :
                 print("You busted! Dealer wins!")
+
+                if amount > 0 :
+                    new_score = score - amount
+                    print("You lost", str(amount), "points!")
+                    print("Your new score is", str(new_score))
+                    score_file = open("score.txt", "w")
+                    score_file.write(str(new_score))
+                    score_file.close()
             elif total(dealer) > total(player) :
                 print("Dealer wins!")
+
+                if amount > 0 :
+                    new_score = score - amount
+                    print("You lost", str(amount), "points!")
+                    print("Your new score is", str(new_score))
+                    score_file = open("score.txt", "w")
+                    score_file.write(str(new_score))
+                    score_file.close()
             elif total(player) > total(dealer) :
                 print("Player wins!")
+                
+                if amount > 0 :
+                    winnings = amount * 1.5
+                    new_score = score + winnings
+                    print("You won", str(amount * 1.5), "points!")
+                    print("Your new score is", str(new_score))
+                    score_file = open("score.txt", "w")
+                    score_file.write(str(new_score))
+                    score_file.close()
             elif total(player) == total(dealer) :
                 print("It\'s a tie!")
+
+                if amount > 0 :
+                    print("Nobody gets any points!")
 
             print() # Blank line
 
             break
-
-
-
-            
-        
 
 game()
